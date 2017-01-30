@@ -1,25 +1,22 @@
 package ListenModul;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Liste{
+public class ListHandler{
     
-    private List<String> liste;
-    Scanner scanner;
-    String eingabe;
-    int position;
-    String content;
+    private  List liste = new List();
+    private Scanner scanner = new Scanner(System.in);
+    private String eingabe;
+    public int position;
+    public String content;
     
-    public Liste(){
-        liste = new ArrayList();
-        scanner = new Scanner(System.in);
+    public ListHandler(){
+        
     }
     
     public static void main(String[]args){
-        Liste testListe = new Liste();
+        ListHandler testListe = new ListHandler();
         testListe.starte();
     }
     
@@ -55,15 +52,11 @@ public class Liste{
         }
     }
     
-    private void replaceContentAtSpecificPoint(){
+    private void replaceContentAtSpecificPoint() throws InputMismatchException{
         askForPosition();
         askForInput();
-        try{
-            liste.set(position ,content);
-            System.out.println("Erfolgreich ersetzt!");
-        }catch(IndexOutOfBoundsException e){
-            System.err.println("Die Position darf nicht verwendet werden! "+ e.getMessage());
-        }
+        liste.set(position ,content);
+        System.out.println("Erfolgreich ersetzt!");
     }
     
     private void removeContentAtSpecificPoint(){
@@ -88,7 +81,9 @@ public class Liste{
     private void showAllContent()
     {
         for (int i = 0; i < liste.size(); i++) {
-            System.out.println(liste.get(i));
+            if(liste.get(i) != null){
+                System.out.println(liste.get(i));
+            }
         }
     }
     
@@ -97,7 +92,8 @@ public class Liste{
         try {
             position = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.err.println("Die Eingabe war Fehlerhaft!"+ e.getMessage());
+            System.err.println("Die Eingabe war Fehlerhaft! "+ e.getMessage()+ " Die Position wurde auf 0 gesetzt!");
+            position = 0;
         }
     }
     
