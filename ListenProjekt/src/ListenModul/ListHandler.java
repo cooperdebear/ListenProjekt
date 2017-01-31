@@ -1,18 +1,19 @@
 package ListenModul;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class ListHandler{
     
-    private  List liste = new List();
-    private Scanner scanner = new Scanner(System.in);
+    private  List<Integer> liste;
+    private Scanner scanner;
     private String eingabe;
-    public int position;
-    public String content;
+    private int position;
+    private int content;
     
     public ListHandler(){
-        
+        liste = new List<Integer>();
+        scanner = new Scanner(System.in);
     }
     
     public static void main(String[]args){
@@ -27,11 +28,12 @@ public class ListHandler{
     }
     
     private void processInput(){
-        System.out.println("Was willst du tun? einfuegen/ersetzen/loeschen/anzeigen/allesAnzeigen/beenden");
+        System.out.println("Was willst du tun? anfuegen/einfuegen/ersetzen/loeschen/anzeigen/allesAnzeigen/beenden");
         eingabe = scanner.next();
         switch(eingabe)
         {
-            case "einfuegen": addContentAtSpecificPoint(); break;
+            case "anfuegen": addContent(); break;
+            case "einfuegen": insertContentAtSpecificPoint(); break;
             case "ersetzen": replaceContentAtSpecificPoint(); break;
             case "loeschen" : removeContentAtSpecificPoint(); break;
             case "anzeigen": showContentAtSpecificPoint(); break;
@@ -41,22 +43,36 @@ public class ListHandler{
         }
     }
     
-    private void addContentAtSpecificPoint(){
-        askForPosition();
+    private void addContent(){
         askForInput();
         try{
-            liste.add(position ,content);
-            System.out.println("Erfolgreich eingefügt!");
-        }catch(IndexOutOfBoundsException e){
-            System.err.println("Die Position "+ e.getMessage() + " darf nicht verwendet werden!");
+            liste.add(content);
+            System.out.println("Erfolgreich angefügt!");
+        }catch(IllegalArgumentException e){
+            System.err.println(e.getMessage());
         }
     }
     
-    private void replaceContentAtSpecificPoint() throws InputMismatchException{
+    private void insertContentAtSpecificPoint(){
         askForPosition();
         askForInput();
-        liste.set(position ,content);
-        System.out.println("Erfolgreich ersetzt!");
+        try{
+            liste.insert(position ,content);
+            System.out.println("Erfolgreich eingefügt!");
+        }catch(IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    private void replaceContentAtSpecificPoint(){
+        askForPosition();
+        askForInput();
+        try{
+            liste.set(position ,content);
+            System.out.println("Erfolgreich ersetzt!");
+        }catch(IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }
     }
     
     private void removeContentAtSpecificPoint(){
@@ -64,45 +80,38 @@ public class ListHandler{
         try{
             liste.remove(position);
             System.out.println("Erfolgreich gelöscht!");
-        }catch(IndexOutOfBoundsException e){
-            System.err.println("Die Position darf nicht verwendet werden! "+ e.getMessage());
-        }
+        }catch(IllegalArgumentException e){
+            System.err.println(e.getMessage());
+        }        
     }
     
     private void showContentAtSpecificPoint(){
         askForPosition();
-        try{
-            System.out.println(liste.get(position));
-        }catch(IndexOutOfBoundsException e){
-            System.err.println("Die Position darf nicht verwendet werden! "+ e.getMessage());
-        }
+        System.out.println(liste.get(position));
     }
     
     private void showAllContent()
     {
         for (int i = 0; i < liste.size(); i++) {
-            if(liste.get(i) != null){
-                System.out.println(liste.get(i));
-            }
+            System.out.println(liste.get(i));
         }
     }
     
     private void askForPosition(){
         System.out.println("An welcher Stelle?");
-        try {
+        try{
             position = scanner.nextInt();
-        } catch (InputMismatchException e) {
-            System.err.println("Die Eingabe war Fehlerhaft! "+ e.getMessage()+ " Die Position wurde auf 0 gesetzt!");
-            position = 0;
+        }catch(InputMismatchException e){
+            System.err.println(e.getMessage());
         }
     }
     
-    private void askForInput(){
+    private void askForInput() {
         System.out.println("Was willst du einfügen?");
         try{
-            content = scanner.next();
-        } catch (InputMismatchException e){
-            System.err.println("Die Eingabe war Fehlerhaft!"+ e.getMessage());
+            content = scanner.nextInt();
+        }catch(InputMismatchException e){
+            System.err.println(e.getMessage());
         }
     }
 }

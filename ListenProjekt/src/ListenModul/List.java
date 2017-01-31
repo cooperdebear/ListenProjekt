@@ -1,58 +1,82 @@
 package ListenModul;
 
-import java.util.InputMismatchException;
-
 /**
  * @author cooperdebear
+ * 
+ * @param <TYP> Legt fest, von welchem Typ das Array sein soll.
+ * 
  */
-public class List {
-    String[] liste = new String[5];
+public class List<TYP> {
+    private TYP[] list;
+    private int counter;
     
     public List(){
-        
+        this.list = (TYP[]) new Object[10];
+        counter = 0;
     }
     
-    public void set(int position, String content){
-        try{
-            liste[position] = content;
-        }catch(InputMismatchException e){
-            System.err.println("Die Position darf nicht verwendet werden! "+ e.getMessage());
+    public void set(int position, TYP content){
+        if(fieldIsInArrayLength(position)){
+            list[position] = content;
+            counter++;
         }
+        else
+            throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
     }
     
-    public void add(int position, String content){
-        if(!fieldIsUsed(position) && fieldIsInArrayLength(position)){
+    public void insert(int position, TYP content){
+        if(!fieldIsInArrayLength(position)){
+            throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
+        }
+        else if(position > size()){
+            throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
+        }
+        else if(!fieldIsUsed(position) && fieldIsInArrayLength(position)){
             set(position, content);
-        }
-        else if(fieldIsUsed(position) && !allFieldsAfterPositionAreUsed(position)){
-            for(int i = giveBackNextFreeFieldAfterPosition(position); i > position; i--){
-                set(i, liste[i-1]);
+        }            
+        else if(fieldIsUsed(position)){
+            for(int i = giveBackNextFreeField(); i > position; i--){
+                set(i, list[i-1]);
+                counter--;
             }
             set(position, content);
         }
         else if(fieldIsUsed(position) && allFieldsAfterPositionAreUsed(position)){
-            liste = giveBackIncreasedArray(liste);
-            for(int i = liste.length; i > position; i--){
-                set(i, liste[i-1]);
+            list = giveBackIncreasedArray(list);
+            for(int i = size(); i > position; i--){
+                set(i, list[i-1]);
+                counter--;
             }
             set(position, content);
         }
-        else if(allFieldsAreUsed()){
-            liste = giveBackIncreasedArray(liste);
-            position = (liste.length-1);
-            set(position, content);
-        }
+    }
+    
+    public void add(TYP content){
+        
+        if(fieldIsInArrayLength(size()))
+            set(size(), content);
         else{
-            
+            list = giveBackIncreasedArray(list);
+            set(size(), content);
         }
     }
     
     public void remove(int position){
-        liste[position] = null;
+        if( fieldIsInArrayLength(position)){
+            
+            if(isLastField(position))
+                list = giveBackIncreasedArray(list);
+            
+            for(int i = position; i <= (size()-1); i++)
+                list[i] = list[i+1];
+            counter--;
+        }
+        else
+            throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
     }
     
     private boolean fieldIsUsed(int position){
-        if(liste[position] != null){
+        if(position < size()){
             return true;
         }
         else{
@@ -61,8 +85,8 @@ public class List {
     }
     
     private boolean allFieldsAfterPositionAreUsed(int position){
-        for(int i = position; i < liste.length; i++){
-            if(liste[i]==null){
+        for(int i = position; i < list.length; i++){
+            if(i < size()){
                 return false;
             }
         }
@@ -71,7 +95,7 @@ public class List {
     
     private boolean allFieldsBeforePositionAreUsed(int position){
         for(int i = 0; i < position; i++){
-            if(liste[i]==null){
+            if(list[i]==null){
                 return false;
             }
         }
@@ -79,27 +103,32 @@ public class List {
     }
     
     private boolean allFieldsAreUsed(){
-        for(int i = 0; i < liste.length; i++){
-            if(liste[i] == null){
-                return false;
-            }
+        if(size() == list.length){
+            return true;
         }
-        return true;
+        
+        return false;
     }
     
-    private int giveBackNextFreeFieldAfterPosition(int position){
-        if(allFieldsAfterPositionAreUsed(position) == false){
-            for(int i = position; i < liste.length; i++){
-                if(liste[i] == null){
-                    return i;
-                }
-            }
+    private boolean isLastField(int position){
+        if(position == (list.length-1))
+            return true;
+        else
+            return false;
+    }
+    
+    private int giveBackNextFreeField(){
+        if(size() < list.length){
+            return (size()+1);
         }
-        return liste.length;
+        else{
+            list = giveBackIncreasedArray(list);
+            return (size()+1);
+        }
     }
     
     private boolean fieldIsInArrayLength(int position){
-        if(position < liste.length && position >= 0){
+        if(position < list.length && position >= 0){
             return true;
         }
         else{
@@ -107,17 +136,17 @@ public class List {
         }
     }
     
-    private String[] giveBackIncreasedArray(String[] array){
-        array = new String[liste.length + 1];
-        System.arraycopy(liste, 0, array, 0, liste.length);
+    private TYP[] giveBackIncreasedArray(TYP[] array){
+        array = (TYP[]) new List[list.length*2];
+        System.arraycopy(list, 0, array, 0, list.length);
         return array;
     }
     
-    public String get(int position){
-        return liste[position];
+    public TYP get(int position){
+        return list[position];
     }
     
     public int size(){
-        return liste.length;
+        return counter;           
     }
 }
