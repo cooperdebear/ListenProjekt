@@ -10,10 +10,8 @@ public abstract class List<TYP> {
     protected List(){
         
     }
-    
-    abstract void set(int position, TYP content);
-    
-    abstract void insert(int position, TYP content);
+        
+    // abstract void insert(int position, TYP content);
     
     abstract void add(TYP content);
     

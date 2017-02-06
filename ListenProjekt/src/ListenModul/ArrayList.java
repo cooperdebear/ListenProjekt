@@ -20,7 +20,6 @@ public class ArrayList<TYP> extends List<TYP>{
         counter = 0;
     }
     
-    @Override
     public void set(int position, TYP content){
         if(fieldIsInArrayLength(position)){
             arrayList[position] = content;
@@ -30,7 +29,6 @@ public class ArrayList<TYP> extends List<TYP>{
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
     }
     
-    @Override
     public void insert(int position, TYP content){
         if(!fieldIsInArrayLength(position)){
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
