@@ -5,14 +5,14 @@ import java.util.InputMismatchException;
 
 public class ListHandler{
     
-    private  List<Integer> liste;
+    private  ArrayList<Integer> list;
     private Scanner scanner;
     private String eingabe;
     private int position;
     private int content;
     
     public ListHandler(){
-        liste = new List<Integer>();
+        list = new ArrayList<>();
         scanner = new Scanner(System.in);
     }
     
@@ -45,19 +45,15 @@ public class ListHandler{
     
     private void addContent(){
         askForInput();
-        try{
-            liste.add(content);
-            System.out.println("Erfolgreich angefügt!");
-        }catch(IllegalArgumentException e){
-            System.err.println(e.getMessage());
-        }
+        list.add(content);
+        System.out.println("Erfolgreich angefügt!");
     }
     
     private void insertContentAtSpecificPoint(){
         askForPosition();
         askForInput();
         try{
-            liste.insert(position ,content);
+            list.insert(position ,content);
             System.out.println("Erfolgreich eingefügt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
@@ -68,7 +64,7 @@ public class ListHandler{
         askForPosition();
         askForInput();
         try{
-            liste.set(position ,content);
+            list.set(position ,content);
             System.out.println("Erfolgreich ersetzt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
@@ -78,7 +74,7 @@ public class ListHandler{
     private void removeContentAtSpecificPoint(){
         askForPosition();
         try{
-            liste.remove(position);
+            list.remove(position);
             System.out.println("Erfolgreich gelöscht!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
@@ -87,13 +83,13 @@ public class ListHandler{
     
     private void showContentAtSpecificPoint(){
         askForPosition();
-        System.out.println(liste.get(position));
+        System.out.println(list.getIndexOf(position));
     }
     
     private void showAllContent()
     {
-        for (int i = 0; i < liste.size(); i++) {
-            System.out.println(liste.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.getIndexOf(i));
         }
     }
     
