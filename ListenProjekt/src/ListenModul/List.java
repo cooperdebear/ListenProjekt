@@ -7,17 +7,17 @@ package ListenModul;
  */
 public abstract class List<TYP> {
     
-    protected List(){
+    public List(){
         
     }
         
     // abstract void insert(int position, TYP content);
     
-    abstract void add(TYP content);
+    public abstract void add(TYP content);
     
-    abstract void remove(int position);
+    public abstract void remove(int position);
     
-    abstract TYP getIndexOf(int position);
+    public abstract TYP getElement(int position);
     
-    abstract int size();
+    public abstract int size();
 }

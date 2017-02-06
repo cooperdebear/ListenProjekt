@@ -70,11 +70,12 @@ public class ArrayList<TYP> extends List<TYP>{
     public void remove(int position){
         if( fieldIsInArrayLength(position)){
             
-            if(isLastField(position))
+            if(isLastField(position)){
                 arrayList = giveBackIncreasedArray(arrayList);
-            
-            for(int i = position; i <= (size()-1); i++)
+            }
+            for(int i = position; i <= (size()-1); i++){
                 arrayList[i] = arrayList[i+1];
+            }
             counter--;
         }
         else
@@ -123,7 +124,7 @@ public class ArrayList<TYP> extends List<TYP>{
     }
     
     @Override
-    public TYP getIndexOf(int position){
+    public TYP getElement(int position){
         return arrayList[position];
     }
     

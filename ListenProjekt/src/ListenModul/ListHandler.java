@@ -5,14 +5,14 @@ import java.util.InputMismatchException;
 
 public class ListHandler{
     
-    private  ArrayList<Integer> list;
+    private  LinkedList<Integer> list;
     private Scanner scanner;
     private String eingabe;
     private int position;
     private int content;
     
     public ListHandler(){
-        list = new ArrayList<>();
+        list = new LinkedList<>();
         scanner = new Scanner(System.in);
     }
     
@@ -64,7 +64,7 @@ public class ListHandler{
         askForPosition();
         askForInput();
         try{
-            list.set(position ,content);
+            list.insert(position ,content);
             System.out.println("Erfolgreich ersetzt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
@@ -83,13 +83,13 @@ public class ListHandler{
     
     private void showContentAtSpecificPoint(){
         askForPosition();
-        System.out.println(list.getIndexOf(position));
+        System.out.println(list.getElement(position));
     }
     
     private void showAllContent()
     {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.getIndexOf(i));
+            System.out.println(list.getElement(i));
         }
     }
     
