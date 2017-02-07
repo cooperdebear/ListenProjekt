@@ -46,6 +46,7 @@ public class ListHandler{
     private void addContent(){
         askForInput();
         list.add(content);
+        System.out.println(list.contentIsInList(content));
         System.out.println("Erfolgreich angefügt!");
     }
     

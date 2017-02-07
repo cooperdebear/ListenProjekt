@@ -11,7 +11,7 @@ public abstract class List<TYP> {
         
     }
         
-    // abstract void insert(int position, TYP content);
+    public abstract void insert(int position, TYP content);
     
     public abstract void add(TYP content);
     
