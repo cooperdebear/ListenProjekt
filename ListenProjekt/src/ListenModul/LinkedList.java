@@ -75,7 +75,9 @@ public class LinkedList<TYP> extends List<TYP> {
             }   
         }
     }
-    public void replace(int position, TYP content){
+    
+    @Override
+    public void set(int position, TYP content){
         if(isEmpty() && position == 1){
             currentLink = new Link(null, null, content);
             firstLink = currentLink;
@@ -213,7 +215,7 @@ public class LinkedList<TYP> extends List<TYP> {
         
     }
 // innere Klasse Link
-public class Link {
+private class Link {
     
     private Link successor = null;
     private Link predecessor = null;

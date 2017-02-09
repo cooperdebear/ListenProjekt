@@ -5,14 +5,14 @@ import java.util.InputMismatchException;
 
 public class ListHandler{
     
-    private  LinkedList<Integer> list;
+    private  ArrayList<Integer> list;
     private Scanner scanner;
     private String eingabe;
     private int position;
     private int content;
     
     public ListHandler(){
-        list = new LinkedList<>();
+        list = new ArrayList<>();
         scanner = new Scanner(System.in);
     }
     
@@ -38,7 +38,7 @@ public class ListHandler{
             case "loeschen" : removeContentAtSpecificPoint(); break;
             case "anzeigen": showContentAtSpecificPoint(); break;
             case "allesAnzeigen": showAllContent(); break;
-            case "suchen": giveBackPositionForContent(); break;
+            //case "suchen": giveBackPositionForContent(); break;
             case "beenden": System.exit(0); break;
             default: System.out.println("Bitte gib etwas von den vorgegebenen Worten ein!");
         }
@@ -65,7 +65,7 @@ public class ListHandler{
         askForPosition();
         askForInput();
         try{
-            list.replace(position ,content);
+            list.set(position ,content);
             System.out.println("Erfolgreich ersetzt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
@@ -116,13 +116,13 @@ public class ListHandler{
         }
     }
     
-    private void giveBackPositionForContent(){
-        askForInput();
-        if(list.contentIsInList(content)){
-            System.out.println("Das Gesuchte befindet sich an Position: " + list.giveBackPositionOfContent(content));
-        }
-        else{
-            System.out.println("Das Gesuchte wurde nicht gefunden.");
-        }
-    }
+   // private void giveBackPositionForContent(){
+   //     askForInput();
+    //    if(list.contentIsInList(content)){
+   //         System.out.println("Das Gesuchte befindet sich an Position: " + list.giveBackPositionOfContent(content));
+   //     }
+   //     else{
+   //         System.out.println("Das Gesuchte wurde nicht gefunden.");
+   //     }
+    //}
 }

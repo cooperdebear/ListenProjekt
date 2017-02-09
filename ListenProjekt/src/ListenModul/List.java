@@ -10,7 +10,9 @@ public abstract class List<TYP> {
     public List(){
         
     }
-        
+    
+    public abstract void set(int position, TYP content);
+    
     public abstract void insert(int position, TYP content);
     
     public abstract void add(TYP content);

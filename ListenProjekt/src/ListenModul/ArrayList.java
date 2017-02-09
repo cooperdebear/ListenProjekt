@@ -20,6 +20,7 @@ public class ArrayList<TYP> extends List<TYP>{
         counter = 0;
     }
     
+    @Override
     public void set(int position, TYP content){
         if(fieldIsInArrayLength(position)){
             arrayList[position] = content;
@@ -29,6 +30,7 @@ public class ArrayList<TYP> extends List<TYP>{
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
     }
     
+    @Override
     public void insert(int position, TYP content){
         if(!fieldIsInArrayLength(position)){
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
@@ -68,7 +70,7 @@ public class ArrayList<TYP> extends List<TYP>{
     
     @Override
     public void remove(int position){
-        if( fieldIsInArrayLength(position)){
+        if( fieldIsInArrayLength(position) && position < size()){
             
             if(isLastField(position)){
                 arrayList = giveBackIncreasedArray(arrayList);
@@ -104,8 +106,8 @@ public class ArrayList<TYP> extends List<TYP>{
     }
     
     private int giveBackNextFreeField(){
-        if(size() < arrayList.length){
-            return (size()+1);
+        if((size()+1) < arrayList.length){
+            return (size());
         }
         else{
             arrayList = giveBackIncreasedArray(arrayList);
@@ -118,8 +120,8 @@ public class ArrayList<TYP> extends List<TYP>{
     }
     
     private TYP[] giveBackIncreasedArray(TYP[] array){
-        array = (TYP[]) new List[array.length*2];
-        System.arraycopy(array, 0, array, 0, array.length);
+        array = (TYP[]) new Object[arrayList.length*2];
+        System.arraycopy(arrayList, 0, array, 0, arrayList.length);
         return array;
     }
     
