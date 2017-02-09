@@ -55,6 +55,19 @@ public class LinkedList<TYP> extends List<TYP> {
         }
     }
 
+    public void replace(int position, TYP content){
+        if(isEmpty()){
+            currentLink = new Link(null, null, content);
+            firstLink = currentLink;
+        }
+        else if(position <= size()){
+            iterateCurrentLinkTo(position);
+            currentLink.setData(content);
+        }
+        else{
+            throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
+        }
+    }
     @Override
     public void add(TYP content) {
         if(isEmpty()){
@@ -120,7 +133,7 @@ public class LinkedList<TYP> extends List<TYP> {
         
     }
     
-    public void removeFirst(){
+    private void removeFirst(){
         if(hasNext(firstLink)){
             currentLink = firstLink.getSuccessor();
             currentLink.setPredecessor(null);
@@ -131,13 +144,13 @@ public class LinkedList<TYP> extends List<TYP> {
         }
     }
     
-    public void removeLast(){
+    private void removeLast(){
         currentLink = lastLink.getPredecessor();
         currentLink.setSuccessor(null);
         lastLink = currentLink;
     }
     
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         return firstLink == null;
     }
     

@@ -65,7 +65,7 @@ public class ListHandler{
         askForPosition();
         askForInput();
         try{
-            list.insert(position ,content);
+            list.replace(position ,content);
             System.out.println("Erfolgreich ersetzt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());
