@@ -51,12 +51,12 @@ public class LinkedList<TYP> extends List<TYP> {
             }
         }
         else{
-            throw new IllegalArgumentException("Es wurde eine falsche Zahl als Position eingegeben!");
+            throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
         }
     }
 
     public void replace(int position, TYP content){
-        if(isEmpty()){
+        if(isEmpty() && position == 1){
             currentLink = new Link(null, null, content);
             firstLink = currentLink;
         }
@@ -97,6 +97,7 @@ public class LinkedList<TYP> extends List<TYP> {
                 currentLink = tempPredecessor;
                 currentLink.setSuccessor(tempSuccessor);
                 tempSuccessor.setPredecessor(currentLink);
+                
             }
         }
         else throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
@@ -159,19 +160,28 @@ public class LinkedList<TYP> extends List<TYP> {
     }
     
     private Link getLastLink(){
-        while(currentLink.successor != null){
+        while(hasNext(currentLink)){
             currentLink = currentLink.successor;
         }
         return currentLink;
     }
     
     private void iterateCurrentLinkTo(int position){
-        currentLink = firstLink;
-        int counter = 0;
-        while(counter < position){
-            currentLink = currentLink.getSuccessor();
-            counter++;
+        if(position >= size())
+        {
+            throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
+        }        
+        else{
+            currentLink = firstLink;
+            int counter = 0;
+            while(counter < position){
+                if(currentLink.getSuccessor() != null){
+                    currentLink = currentLink.getSuccessor();
+                    counter++;
+                }
+            }   
         }
+        
     }
     
     public int giveBackPositionOfContent(TYP content){

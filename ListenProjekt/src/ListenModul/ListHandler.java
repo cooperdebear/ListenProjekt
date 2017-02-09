@@ -84,7 +84,11 @@ public class ListHandler{
     
     private void showContentAtSpecificPoint(){
         askForPosition();
-        System.out.println(list.getElement(position));
+        try {
+            System.out.println(list.getElement(position));
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
     
     private void showAllContent()
