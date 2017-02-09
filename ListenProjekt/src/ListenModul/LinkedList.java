@@ -55,6 +55,26 @@ public class LinkedList<TYP> extends List<TYP> {
         }
     }
 
+    private boolean isEmpty(){
+        return firstLink == null;
+    }
+    
+    private void iterateCurrentLinkTo(int position){
+        if(position >= size())
+        {
+            throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
+        }        
+        else{
+            currentLink = firstLink;
+            int counter = 0;
+            while(counter < position){
+                if(currentLink.getSuccessor() != null){
+                    currentLink = currentLink.getSuccessor();
+                    counter++;
+                }
+            }   
+        }
+    }
     public void replace(int position, TYP content){
         if(isEmpty() && position == 1){
             currentLink = new Link(null, null, content);
@@ -80,6 +100,13 @@ public class LinkedList<TYP> extends List<TYP> {
             currentLink = lastLink;
         }
     }
+    
+     private Link getLastLink(){
+        while(hasNext(currentLink)){
+            currentLink = currentLink.successor;
+        }
+        return currentLink;
+    }
 
     @Override
     public void remove(int position) {
@@ -101,6 +128,23 @@ public class LinkedList<TYP> extends List<TYP> {
             }
         }
         else throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
+    }
+    
+     private void removeFirst(){
+        if(hasNext(firstLink)){
+            currentLink = firstLink.getSuccessor();
+            currentLink.setPredecessor(null);
+            firstLink = currentLink;
+        }
+        else{
+            firstLink = null;
+        }
+    }
+    
+    private void removeLast(){
+        currentLink = lastLink.getPredecessor();
+        currentLink.setSuccessor(null);
+        lastLink = currentLink;
     }
     
     @Override
@@ -134,54 +178,8 @@ public class LinkedList<TYP> extends List<TYP> {
         
     }
     
-    private void removeFirst(){
-        if(hasNext(firstLink)){
-            currentLink = firstLink.getSuccessor();
-            currentLink.setPredecessor(null);
-            firstLink = currentLink;
-        }
-        else{
-            firstLink = null;
-        }
-    }
-    
-    private void removeLast(){
-        currentLink = lastLink.getPredecessor();
-        currentLink.setSuccessor(null);
-        lastLink = currentLink;
-    }
-    
-    private boolean isEmpty(){
-        return firstLink == null;
-    }
-    
     private boolean hasNext(Link link){
         return link.getSuccessor() != null;
-    }
-    
-    private Link getLastLink(){
-        while(hasNext(currentLink)){
-            currentLink = currentLink.successor;
-        }
-        return currentLink;
-    }
-    
-    private void iterateCurrentLinkTo(int position){
-        if(position >= size())
-        {
-            throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
-        }        
-        else{
-            currentLink = firstLink;
-            int counter = 0;
-            while(counter < position){
-                if(currentLink.getSuccessor() != null){
-                    currentLink = currentLink.getSuccessor();
-                    counter++;
-                }
-            }   
-        }
-        
     }
     
     public int giveBackPositionOfContent(TYP content){

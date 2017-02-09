@@ -28,7 +28,7 @@ public class ListHandler{
     }
     
     private void processInput(){
-        System.out.println("Was willst du tun? anfuegen/einfuegen/ersetzen/loeschen/anzeigen/allesAnzeigen/beenden");
+        System.out.println("Was willst du tun? anfuegen/einfuegen/ersetzen/loeschen/anzeigen/allesAnzeigen/suchen/beenden");
         eingabe = scanner.next();
         switch(eingabe)
         {
@@ -38,6 +38,7 @@ public class ListHandler{
             case "loeschen" : removeContentAtSpecificPoint(); break;
             case "anzeigen": showContentAtSpecificPoint(); break;
             case "allesAnzeigen": showAllContent(); break;
+            case "suchen": giveBackPositionForContent(); break;
             case "beenden": System.exit(0); break;
             default: System.out.println("Bitte gib etwas von den vorgegebenen Worten ein!");
         }
@@ -46,7 +47,6 @@ public class ListHandler{
     private void addContent(){
         askForInput();
         list.add(content);
-        System.out.println(list.contentIsInList(content));
         System.out.println("Erfolgreich angefügt!");
     }
     
@@ -108,11 +108,21 @@ public class ListHandler{
     }
     
     private void askForInput() {
-        System.out.println("Was willst du einfügen?");
+        System.out.println("Was willst du einfügen/suchen?");
         try{
             content = scanner.nextInt();
         }catch(InputMismatchException e){
             System.err.println(e.getMessage());
+        }
+    }
+    
+    private void giveBackPositionForContent(){
+        askForInput();
+        if(list.contentIsInList(content)){
+            System.out.println("Das Gesuchte befindet sich an Position: " + list.giveBackPositionOfContent(content));
+        }
+        else{
+            System.out.println("Das Gesuchte wurde nicht gefunden.");
         }
     }
 }
