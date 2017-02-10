@@ -5,14 +5,14 @@ import java.util.InputMismatchException;
 
 public class ListHandler{
     
-    private  ArrayList<Integer> list;
+    private  LinkedList<Integer> list;
     private Scanner scanner;
     private String eingabe;
     private int position;
     private int content;
     
     public ListHandler(){
-        list = new ArrayList<>();
+        list = new LinkedList<>();
         scanner = new Scanner(System.in);
     }
     
