@@ -169,13 +169,13 @@ public class LinkedList<TYP> extends List<TYP> {
             return 0;
         }
         else{
-            currentLink = firstLink;
-            int counter = 0;
-            while(hasNext(currentLink)){
-                currentLink = currentLink.getSuccessor();
+            Link tempCurrentLink = firstLink;
+            int counter = 1;
+            while(hasNext(tempCurrentLink)){
+                tempCurrentLink = tempCurrentLink.getSuccessor();
                 counter++;
             }
-            return counter+1;
+            return counter;
         }
         
     }
