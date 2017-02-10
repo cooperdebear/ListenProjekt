@@ -76,7 +76,7 @@ public class ArrayList<TYP> extends List<TYP>{
                 arrayList = giveBackIncreasedArray(arrayList);
             }
             for(int i = position; i <= (size()-1); i++){
-                arrayList[i] = arrayList[i+1];
+                arrayList[i] = getElement(i+1);
             }
             counter--;
         }
