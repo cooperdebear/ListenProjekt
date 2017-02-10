@@ -35,7 +35,7 @@ public class ArrayList<TYP> extends List<TYP>{
         if(!fieldIsInArrayLength(position)){
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
         }
-        else if(position > size()){
+        else if(position >= size()){
             throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
         }
         else if(!fieldIsUsed(position) && fieldIsInArrayLength(position)){
@@ -51,7 +51,7 @@ public class ArrayList<TYP> extends List<TYP>{
         else if(fieldIsUsed(position) && allFieldsAfterPositionAreUsed(position)){
             arrayList = giveBackIncreasedArray(arrayList);
             for(int i = size(); i > position; i--){
-                set(i, arrayList[i-1]);
+                set(i, getElement(i-1));
                 counter--;
             }
             set(position, content);
