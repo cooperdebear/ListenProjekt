@@ -70,13 +70,19 @@ public class ArrayList<TYP> extends List<TYP>{
     
     @Override
     public void remove(int position){
-        if( fieldIsInArrayLength(position) && position < size()){
+        if(fieldIsInArrayLength(position) && position < size()){
             
             if(isLastField(position)){
                 arrayList = giveBackIncreasedArray(arrayList);
             }
             for(int i = position; i <= (size()-1); i++){
-                arrayList[i] = getElement(i+1);
+                if( i == (size()-1) )
+                {
+                    arrayList[i] = null;
+                }
+                else{
+                    arrayList[i] = getElement(i+1);
+                }
             }
             counter--;
         }
@@ -127,7 +133,12 @@ public class ArrayList<TYP> extends List<TYP>{
     
     @Override
     public TYP getElement(int position){
-        return arrayList[position];
+        if(fieldIsInArrayLength(position) && position < size()){
+            return arrayList[position];
+        }
+        else{
+            throw new IllegalArgumentException("Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!");
+        }
     }
     
     @Override
