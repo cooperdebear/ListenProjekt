@@ -1,4 +1,4 @@
-package ListenModul;
+package ListModul;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
