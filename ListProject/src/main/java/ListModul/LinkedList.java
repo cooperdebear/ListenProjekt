@@ -133,13 +133,15 @@ public class LinkedList<TYP> extends List<TYP> {
     }
     
      private void removeFirst(){
-        if(hasNext(firstLink)){
+        if(hasNext(firstLink)&& firstLink != lastLink){
             currentLink = firstLink.getSuccessor();
             currentLink.setPredecessor(null);
             firstLink = currentLink;
         }
         else{
             firstLink = null;
+            currentLink = null;
+            lastLink = null;
         }
     }
     
