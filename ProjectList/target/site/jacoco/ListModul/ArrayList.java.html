@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ArrayList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProjectList</a> &gt; <a href="index.source.html" class="el_package">ListModul</a> &gt; <span class="el_source">ArrayList.java</span></div><h1>ArrayList.java</h1><pre class="source lang-java linenums">package ListModul;
+
+/**
+ *
+ * @author cooperdebear
+ * @param &lt;TYP&gt; Gibt an, von welchem Typ die Inhalte des Arrays sein sollen.
+ */
+public class ArrayList&lt;TYP&gt; extends List&lt;TYP&gt;{
+    
+    private TYP[] arrayList;
+    private int counter;
+    
+<span class="fc" id="L13">    public ArrayList(){</span>
+<span class="fc" id="L14">        this.arrayList = (TYP[]) new Object[10];</span>
+<span class="fc" id="L15">        counter = 0;</span>
+<span class="fc" id="L16">    }</span>
+    
+    @Override
+    public void set(int position, TYP content){
+<span class="pc bpc" id="L20" title="1 of 4 branches missed.">        if(position &gt;= 0 &amp;&amp; position &lt; size()){</span>
+<span class="fc" id="L21">            arrayList[position] = content;</span>
+        }
+        else
+<span class="fc" id="L24">            throw new IllegalArgumentException(&quot;Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!&quot;);</span>
+<span class="fc" id="L25">    }</span>
+    
+    @Override
+    public void add(int position, TYP content){
+<span class="fc bfc" id="L29" title="All 4 branches covered.">        if(position &lt; 0 || position &gt; size()){</span>
+<span class="fc" id="L30">            throw new IllegalArgumentException(&quot;Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!&quot;);</span>
+        }
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        else if(size() == position){</span>
+<span class="fc" id="L33">            add(content);</span>
+        }            
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        else if(fieldIsUsed(position)){</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            if(allFieldsAreUsed())</span>
+            {
+<span class="fc" id="L38">                arrayList = giveBackIncreasedArray(arrayList);</span>
+            }
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for(int i = size(); i &gt;= (position+1); i--){                </span>
+<span class="fc" id="L41">                counter++;</span>
+<span class="fc" id="L42">                set(i, arrayList[i-1]);</span>
+<span class="fc" id="L43">                counter--;</span>
+            }
+<span class="fc" id="L45">            set(position, content);</span>
+<span class="fc" id="L46">            counter++;</span>
+        }
+<span class="fc" id="L48">    }</span>
+    
+    @Override
+    public void add(TYP content){
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if(allFieldsAreUsed()){</span>
+<span class="fc" id="L53">            arrayList = giveBackIncreasedArray(arrayList);</span>
+        } 
+<span class="fc" id="L55">        arrayList[size()] = content;</span>
+<span class="fc" id="L56">        counter++;</span>
+<span class="fc" id="L57">    }</span>
+    
+    @Override
+    public void remove(int position){
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">        if(position &gt;= 0 &amp;&amp; position &lt; size()){</span>
+            
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if(isLastField(position)){</span>
+<span class="fc" id="L64">                arrayList = giveBackIncreasedArray(arrayList);</span>
+            }
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for(int i = position; i &lt;= (size()-1); i++){</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">                if( i == (size()-1) )</span>
+                {
+<span class="fc" id="L69">                    arrayList[i] = null;</span>
+                }
+                else{
+<span class="fc" id="L72">                    arrayList[i] = arrayList[i+1];</span>
+                }
+            }
+<span class="fc" id="L75">            counter--;</span>
+        }
+        else
+<span class="fc" id="L78">            throw new IllegalArgumentException(&quot;Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!&quot;);</span>
+<span class="fc" id="L79">    }</span>
+    
+    @Override
+    public TYP getElement(int position){
+<span class="pc bpc" id="L83" title="1 of 4 branches missed.">        if(position &gt;= 0 &amp;&amp; position &lt; size()){</span>
+<span class="fc" id="L84">            return arrayList[position];</span>
+        }
+        else{
+<span class="fc" id="L87">            throw new IllegalArgumentException(&quot;Der Wert ist hier nicht zulässig, da er außerhalb des Wertebereichsliegt!&quot;);</span>
+        }
+    }
+    
+    private boolean fieldIsUsed(int position){
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        return position &lt; size();</span>
+    }
+    
+    private boolean allFieldsAreUsed(){
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        return size() == arrayList.length;</span>
+    }
+    
+    private boolean isLastField(int position){
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        return position == (arrayList.length-1);</span>
+    }
+    
+    private TYP[] giveBackIncreasedArray(TYP[] array){
+<span class="fc" id="L104">        array = (TYP[]) new Object[arrayList.length*2];</span>
+<span class="fc" id="L105">        System.arraycopy(arrayList, 0, array, 0, arrayList.length);</span>
+<span class="fc" id="L106">        return array;</span>
+    }
+    
+    @Override
+    public int size(){
+<span class="fc" id="L111">        return counter;           </span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

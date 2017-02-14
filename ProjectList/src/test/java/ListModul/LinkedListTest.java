@@ -1,6 +1,7 @@
 package ListModul;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -128,5 +129,59 @@ public class LinkedListTest {
         
         Object a = 3;
         assertEquals(a, list.getElement(2));
+    }
+    
+    @Test
+    public void resetOnSecondPosition(){
+        list.add(1);
+        list.add(2);
+        list.set(1, 3);
+        
+        Object a = 3;
+        assertEquals(a, list.getElement(1));
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void getElementLowerZero(){
+        list.add(0);
+        list.getElement(-1);
+    }
+    
+    @Test
+    public void giveBackPositionOfContent(){
+        list.add(1);
+        int a = list.giveBackPositionOfContent(1);
+        
+        int b = 0;
+        
+        assertEquals(b, a);
+    }
+    
+    @Test
+    public void giveBackPositionLowerThanZero(){
+        int a = list.giveBackPositionOfContent(-2);
+        
+        int b = -1;
+        
+        assertEquals(b, a);
+    }
+    
+    @Test
+    public void contentIsInList(){
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(1);
+        
+        assertTrue(list.contentIsInList(1));        
+        
+    }
+    
+    @Test
+    public void contentIsNotInList(){
+        list.add(2);
+        list.add(3);
+        
+        assertTrue(!list.contentIsInList(1));
     }
 }
