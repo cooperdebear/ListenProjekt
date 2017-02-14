@@ -1,0 +1,8 @@
+#surefire
+#Tue Feb 14 22:50:37 CET 2017
+maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
+skipTests=false
+user.dir=C\:\\Users\\BesitzerA\\Documents\\GitHub\\ListenProjekt\\ProjectList
+file.encoding=UTF-8
+localRepository=C\:\\Users\\BesitzerA\\.m2\\repository
+basedir=C\:\\Users\\BesitzerA\\Documents\\GitHub\\ListenProjekt\\ProjectList

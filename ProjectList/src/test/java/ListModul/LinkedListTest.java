@@ -1,7 +1,6 @@
-package ListJUnitTest;
+package ListModul;
 
 import static org.junit.Assert.assertEquals;
-import ListModul.ArrayList;
 
 import org.junit.Test;
 import org.junit.Before;
@@ -12,13 +11,13 @@ import org.junit.AfterClass;
  *
  * @author cooperdebear
  */
-public class ArrayListTest {
+public class LinkedListTest {
     
-    private static ArrayList<Integer> list;
+    private static LinkedList<Integer> list;
     
     @BeforeClass
     public static void createList(){
-        list = new ArrayList<>();
+        list = new LinkedList<>();
     }
     
     @AfterClass
@@ -28,7 +27,7 @@ public class ArrayListTest {
     
     @Before
     public void resetList(){
-        list = new ArrayList<>();
+        list = new LinkedList<>();
     }
     
     @Test
