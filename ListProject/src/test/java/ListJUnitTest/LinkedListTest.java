@@ -3,17 +3,18 @@ package ListJUnitTest;
 import static org.junit.Assert.assertEquals;
 import ListModul.LinkedList;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
+
 /**
  *
  * @author cooperdebear
  */
 public class LinkedListTest {
     
-    private static LinkedList<Integer> list = new LinkedList<>();
+    private static LinkedList<Integer> list;
     
     @BeforeClass
     public static void createList(){
@@ -112,5 +113,21 @@ public class LinkedListTest {
     @Test (expected = IllegalArgumentException.class)
     public void getElementAtEmptyList(){
         list.getElement(0);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void addLowerZero(){
+        list.add(-1,9);
+    }
+    
+    @Test
+    public void addInUsedFieldAndAllFieldsAreUsed(){
+        for(int i = 0; i < 10; i++){
+            list.add(0,0);
+        }
+        list.add(2,3);
+        
+        Object a = 3;
+        assertEquals(a, list.getElement(2));
     }
 }

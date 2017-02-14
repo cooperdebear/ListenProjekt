@@ -114,4 +114,20 @@ public class ArrayListTest {
     public void getElementAtEmptyList(){
         list.getElement(0);
     }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void addLowerZero(){
+        list.add(-1,9);
+    }
+    
+    @Test
+    public void addInUsedFieldAndAllFieldsAreUsed(){
+        for(int i = 0; i < 10; i++){
+            list.add(0,0);
+        }
+        list.add(2,3);
+        
+        Object a = 3;
+        assertEquals(a, list.getElement(2));
+    }
 }

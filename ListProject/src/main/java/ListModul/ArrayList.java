@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ListModul;
 
 /**
@@ -103,10 +98,6 @@ public class ArrayList<TYP> extends List<TYP>{
     
     private boolean isLastField(int position){
         return position == (arrayList.length-1);
-    }
-    
-    private boolean fieldIsInArrayLength(int position){
-        return position < arrayList.length && position >= 0;
     }
     
     private TYP[] giveBackIncreasedArray(TYP[] array){
