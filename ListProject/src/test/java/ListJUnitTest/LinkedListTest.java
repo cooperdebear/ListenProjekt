@@ -13,7 +13,7 @@ import org.junit.AfterClass;
  */
 public class LinkedListTest {
     
-    private static LinkedList<Integer> list;
+    private static LinkedList<Integer> list = new LinkedList<>();
     
     @BeforeClass
     public static void createList(){
@@ -40,11 +40,10 @@ public class LinkedListTest {
     }
     
     @Test
-    public void insert(){
+    public void addSecond(){
         Object a = 19;
-        list.add(19);
-        for(int i = 0; i < 19; i++){
-            list.insert(i, i);
+        for(int i = 0; i < 20; i++){
+            list.add(i, i);
         }
         assertEquals(a, list.getElement(19));
     }
@@ -78,5 +77,40 @@ public class LinkedListTest {
         }
         Object a = 20;
         assertEquals( a, list.size());
+    }
+    
+    @Test
+    public void addinEmptyList(){
+        list.add(0, 0);
+        list.add(0, 1);
+        list.add(0, 2);
+        
+        Object a = 2;
+        Object b = 1;
+        Object c = 0;
+        assertEquals(a, list.getElement(0));
+        assertEquals(b, list.getElement(1));
+        assertEquals(c, list.getElement(2));
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void insertOutOfSize(){
+        list.add(1, 2);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void insertOutOfArrayLength(){
+        list.add(100, 1);
+        list.add(100, 1);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void setFirstPosition(){
+        list.set(0, 2);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void getElementAtEmptyList(){
+        list.getElement(0);
     }
 }

@@ -24,12 +24,15 @@ public class LinkedList<TYP> extends List<TYP> {
     }
     
     @Override
-    public void insert(int position, TYP content) {
-        if(isEmpty()){
+    public void add(int position, TYP content) {
+        if(isEmpty() && position == 0){
             currentLink = new Link(null, null, content);
             firstLink = currentLink;
         }
-        else if(position <= size()){
+        else if(position == size()){
+            add(content);
+        }
+        else if(position < size()){
             iterateCurrentLinkTo(position);
             if(currentLink == firstLink && size() == 1){
                 lastLink = currentLink;
@@ -60,7 +63,7 @@ public class LinkedList<TYP> extends List<TYP> {
     }
     
     private void iterateCurrentLinkTo(int position){
-        if(position >= size())
+        if(position > size())
         {
             throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
         }        
@@ -78,11 +81,7 @@ public class LinkedList<TYP> extends List<TYP> {
     
     @Override
     public void set(int position, TYP content){
-        if(isEmpty() && position == 1){
-            currentLink = new Link(null, null, content);
-            firstLink = currentLink;
-        }
-        else if(position <= size()){
+        if(position >= 0 && position < size()){
             iterateCurrentLinkTo(position);
             currentLink.setData(content);
         }
@@ -93,7 +92,7 @@ public class LinkedList<TYP> extends List<TYP> {
     @Override
     public void add(TYP content) {
         if(isEmpty()){
-            insert(1 , content);
+            add(0 , content);
         }
         else{
             currentLink = getLastLink();
@@ -156,7 +155,7 @@ public class LinkedList<TYP> extends List<TYP> {
         if(isEmpty()){
             throw new IllegalArgumentException("Die Liste ist Leer!");
         }
-        else if(position > size()){
+        else if(position >= size()){
             throw new IllegalArgumentException("Die angegebene Position ist nicht im Geltungsbereich!");
         }
         else{

@@ -54,7 +54,7 @@ public class ListHandler{
         askForPosition();
         askForInput();
         try{
-            list.insert(position ,content);
+            list.add(position ,content);
             System.out.println("Erfolgreich eingefügt!");
         }catch(IllegalArgumentException e){
             System.err.println(e.getMessage());

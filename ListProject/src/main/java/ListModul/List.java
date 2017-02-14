@@ -13,7 +13,7 @@ public abstract class List<TYP> {
     
     public abstract void set(int position, TYP content);
     
-    public abstract void insert(int position, TYP content);
+    public abstract void add(int position, TYP content);
     
     public abstract void add(TYP content);
     
