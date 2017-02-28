@@ -5,13 +5,13 @@
  * @author cooperdebear
  * @param &lt;TYP&gt; Gibt an, von welchem Typ die Inhalte des Arrays sein sollen.
  */
-public class ArrayList&lt;TYP&gt; extends List&lt;TYP&gt;{
+public class ArrayList&lt;TYP extends Comparable&lt;TYP&gt;&gt; extends List&lt;TYP&gt;{
     
     private TYP[] arrayList;
     private int counter;
     
 <span class="fc" id="L13">    public ArrayList(){</span>
-<span class="fc" id="L14">        this.arrayList = (TYP[]) new Object[10];</span>
+<span class="fc" id="L14">        this.arrayList = (TYP[]) new Comparable[10];</span>
 <span class="fc" id="L15">        counter = 0;</span>
 <span class="fc" id="L16">    }</span>
     
@@ -101,7 +101,7 @@ public class ArrayList&lt;TYP&gt; extends List&lt;TYP&gt;{
     }
     
     private TYP[] giveBackIncreasedArray(TYP[] array){
-<span class="fc" id="L104">        array = (TYP[]) new Object[arrayList.length*2];</span>
+<span class="fc" id="L104">        array = (TYP[]) new Comparable[arrayList.length*2];</span>
 <span class="fc" id="L105">        System.arraycopy(arrayList, 0, array, 0, arrayList.length);</span>
 <span class="fc" id="L106">        return array;</span>
     }
@@ -110,5 +110,56 @@ public class ArrayList&lt;TYP&gt; extends List&lt;TYP&gt;{
     public int size(){
 <span class="fc" id="L111">        return counter;           </span>
     }
+    
+    @Override
+    public void sort(){
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        if(size() &gt; 0){</span>
+<span class="fc" id="L117">            quicksort(0, size()-1);</span>
+        }
+        else{
+<span class="fc" id="L120">            throw new IllegalArgumentException(&quot;Die Liste ist Leer!&quot;);</span>
+        }
+<span class="fc" id="L122">    }</span>
+    
+    private void quicksort(int left, int right){
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if(left &lt; right){</span>
+<span class="fc" id="L126">            int divider = split(left, right);</span>
+<span class="fc" id="L127">            quicksort(left, divider-1);</span>
+<span class="fc" id="L128">            quicksort(divider+1, right);</span>
+        }
+<span class="fc" id="L130">    }</span>
+    
+    private int split(int left, int right){
+<span class="fc" id="L133">        int i = left;</span>
+<span class="fc" id="L134">        int j = right-1;</span>
+<span class="fc" id="L135">        TYP pivot = arrayList[right];</span>
+        
+        do{
+<span class="fc bfc" id="L138" title="All 4 branches covered.">            while(arrayList[i].compareTo(pivot) &lt;= 0 &amp;&amp; i &lt; right){</span>
+<span class="fc" id="L139">                i++;</span>
+            }
+<span class="pc bpc" id="L141" title="1 of 4 branches missed.">            while(arrayList[j].compareTo(pivot) &gt;= 0 &amp;&amp; j &gt; left){</span>
+<span class="fc" id="L142">                j--;</span>
+            }
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">            if(i &lt; j){</span>
+<span class="nc" id="L145">                TYP tempElement = getElement(i);</span>
+<span class="nc" id="L146">                arrayList[i] = getElement(j);</span>
+<span class="nc" id="L147">                arrayList[j] = tempElement;</span>
+            }
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">        }while(i &lt; j);</span>
+        
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if(arrayList[i].compareTo(pivot) == 1){</span>
+<span class="fc" id="L152">            TYP tempElement = getElement(i);</span>
+<span class="fc" id="L153">            arrayList[i] = pivot;</span>
+<span class="fc" id="L154">            arrayList[right] = tempElement;</span>
+        }
+<span class="fc" id="L156">        return i;</span>
+    }
+    
+    private int compare(TYP a, TYP b){
+<span class="nc" id="L160">        return a.compareTo(b);</span>
+    }
+
+  
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -5,7 +5,7 @@
  * @author cooperdebear
  * @param &lt;TYP&gt; Gibt an, von welchem Typ der Inhalt der Liste sein soll.
  */
-public class LinkedList&lt;TYP&gt; extends List&lt;TYP&gt; {
+public class LinkedList&lt;TYP&gt; extends List&lt;TYP&gt; implements Comparable&lt;TYP&gt;{
     
     private Link firstLink;
     private Link lastLink;
@@ -192,43 +192,59 @@ public class LinkedList&lt;TYP&gt; extends List&lt;TYP&gt; {
         }
         
     }
+    
+    public void quicksort(){
+        
+<span class="nc" id="L198">    }</span>
+
+    @Override
+    public int compareTo(TYP o) {
+<span class="nc" id="L202">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public void sort() {
+<span class="nc" id="L207">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+    
+    
 // innere Klasse Link
 private class Link {
     
-<span class="fc" id="L198">    private Link successor = null;</span>
-<span class="fc" id="L199">    private Link predecessor = null;</span>
-<span class="fc" id="L200">    private Object data = null;</span>
+<span class="fc" id="L214">    private Link successor = null;</span>
+<span class="fc" id="L215">    private Link predecessor = null;</span>
+<span class="fc" id="L216">    private Object data = null;</span>
     
-<span class="fc" id="L202">    public Link(Link successor, Link predecessor, Object data){</span>
+<span class="fc" id="L218">    public Link(Link successor, Link predecessor, Object data){</span>
         
-<span class="fc" id="L204">        this.successor = successor;</span>
-<span class="fc" id="L205">        this.predecessor = predecessor;</span>
-<span class="fc" id="L206">        this.data = data;</span>
-<span class="fc" id="L207">    }</span>
+<span class="fc" id="L220">        this.successor = successor;</span>
+<span class="fc" id="L221">        this.predecessor = predecessor;</span>
+<span class="fc" id="L222">        this.data = data;</span>
+<span class="fc" id="L223">    }</span>
     
     public Link getSuccessor() {
-<span class="fc" id="L210">        return successor;</span>
+<span class="fc" id="L226">        return successor;</span>
     }
 
     public void setSuccessor(Link successor) {
-<span class="fc" id="L214">        this.successor = successor;</span>
-<span class="fc" id="L215">    }</span>
+<span class="fc" id="L230">        this.successor = successor;</span>
+<span class="fc" id="L231">    }</span>
 
     public Link getPredecessor() {
-<span class="fc" id="L218">        return predecessor;</span>
+<span class="fc" id="L234">        return predecessor;</span>
     }
 
     public void setPredecessor(Link predecessor) {
-<span class="fc" id="L222">        this.predecessor = predecessor;</span>
-<span class="fc" id="L223">    }</span>
+<span class="fc" id="L238">        this.predecessor = predecessor;</span>
+<span class="fc" id="L239">    }</span>
 
     public Object getData() {
-<span class="fc" id="L226">        return data;</span>
+<span class="fc" id="L242">        return data;</span>
     }
 
     public void setData(Object data) {
-<span class="fc" id="L230">        this.data = data;</span>
-<span class="fc" id="L231">    }</span>
+<span class="fc" id="L246">        this.data = data;</span>
+<span class="fc" id="L247">    }</span>
     
 }    
 }

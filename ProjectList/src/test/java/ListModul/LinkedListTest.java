@@ -184,4 +184,36 @@ public class LinkedListTest {
         
         assertTrue(!list.contentIsInList(1));
     }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void quicksortEmptyList(){
+        list.sort();
+    }
+    
+    @Test
+    public void quicksortFilledList(){
+        list.add(1);
+        list.add(5);
+        list.add(3);
+        
+        list.sort();
+        
+        assertEquals(list.getElement(0),(Object) 1);
+        assertEquals(list.getElement(1),(Object) 3);
+        assertEquals(list.getElement(2),(Object) 5);
+    }
+    
+    @Test
+    public void quicksortTwoTimes(){
+        list.add(1);
+        list.add(5);
+        list.add(3);
+        
+        list.sort();
+        list.sort();
+        
+        assertEquals(list.getElement(0),(Object) 1);
+        assertEquals(list.getElement(1),(Object) 3);
+        assertEquals(list.getElement(2),(Object) 5);
+    }
 }
