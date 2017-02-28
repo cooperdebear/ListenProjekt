@@ -22,4 +22,6 @@ public abstract class List<TYP> {
     public abstract TYP getElement(int position);
     
     public abstract int size();
+    
+    public abstract void sort();
 }

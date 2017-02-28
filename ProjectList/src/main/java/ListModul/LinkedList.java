@@ -5,7 +5,7 @@ package ListModul;
  * @author cooperdebear
  * @param <TYP> Gibt an, von welchem Typ der Inhalt der Liste sein soll.
  */
-public class LinkedList<TYP> extends List<TYP> {
+public class LinkedList<TYP> extends List<TYP> implements Comparable<TYP>{
     
     private Link firstLink;
     private Link lastLink;
@@ -192,6 +192,22 @@ public class LinkedList<TYP> extends List<TYP> {
         }
         
     }
+    
+    public void quicksort(){
+        
+    }
+
+    @Override
+    public int compareTo(TYP o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void sort() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 // innere Klasse Link
 private class Link {
     
