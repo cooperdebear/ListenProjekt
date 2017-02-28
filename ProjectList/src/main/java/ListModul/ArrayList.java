@@ -110,55 +110,6 @@ public class ArrayList<TYP extends Comparable<TYP>> extends List<TYP>{
     public int size(){
         return counter;           
     }
-    
-    @Override
-    public void sort(){
-        if(size() > 0){
-            quicksort(0, size()-1);
-        }
-        else{
-            throw new IllegalArgumentException("Die Liste ist Leer!");
-        }
-    }
-    
-    private void quicksort(int left, int right){
-        if(left < right){
-            int divider = split(left, right);
-            quicksort(left, divider-1);
-            quicksort(divider+1, right);
-        }
-    }
-    
-    private int split(int left, int right){
-        int i = left;
-        int j = right-1;
-        TYP pivot = arrayList[right];
-        
-        do{
-            while(arrayList[i].compareTo(pivot) <= 0 && i < right){
-                i++;
-            }
-            while(arrayList[j].compareTo(pivot) >= 0 && j > left){
-                j--;
-            }
-            if(i < j){
-                TYP tempElement = getElement(i);
-                arrayList[i] = getElement(j);
-                arrayList[j] = tempElement;
-            }
-        }while(i < j);
-        
-        if(arrayList[i].compareTo(pivot) == 1){
-            TYP tempElement = getElement(i);
-            arrayList[i] = pivot;
-            arrayList[right] = tempElement;
-        }
-        return i;
-    }
-    
-    private int compare(TYP a, TYP b){
-        return a.compareTo(b);
-    }
 
   
 }
