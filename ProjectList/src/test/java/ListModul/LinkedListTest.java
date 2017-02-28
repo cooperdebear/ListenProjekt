@@ -208,12 +208,24 @@ public class LinkedListTest {
         list.add(1);
         list.add(5);
         list.add(3);
+        list.add(120);
+        list.add(5);
+        list.add(3);
+        list.add(1);
+        list.add(5);
+        list.add(8);
         
         list.sort();
         list.sort();
         
         assertEquals(list.getElement(0),(Object) 1);
-        assertEquals(list.getElement(1),(Object) 3);
-        assertEquals(list.getElement(2),(Object) 5);
+        assertEquals(list.getElement(1),(Object) 1);
+        assertEquals(list.getElement(2),(Object) 3);
+        assertEquals(list.getElement(3),(Object) 3);
+        assertEquals(list.getElement(4),(Object) 5);
+        assertEquals(list.getElement(5),(Object) 5);
+        assertEquals(list.getElement(6),(Object) 5);
+        assertEquals(list.getElement(7),(Object) 8);
+        assertEquals(list.getElement(8),(Object) 120);
     }
 }
