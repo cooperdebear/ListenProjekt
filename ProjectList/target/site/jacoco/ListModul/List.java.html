@@ -5,7 +5,7 @@
  * 
  * @param &lt;TYP&gt; Legt fest, von welchem Typ das Array sein soll.
  */
-public abstract class List&lt;TYP&gt; {
+public abstract class List&lt;TYP extends Comparable&lt;TYP&gt;&gt; {
     
 <span class="fc" id="L10">    public List(){</span>
         
@@ -23,6 +23,48 @@ public abstract class List&lt;TYP&gt; {
     
     public abstract int size();
     
-    public abstract void sort();
+    public void sort() {
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if(size() &gt; 0){</span>
+<span class="fc" id="L28">            quicksort(0, size()-1);</span>
+        }
+        else{
+<span class="fc" id="L31">            throw new IllegalArgumentException(&quot;Die Liste ist Leer!&quot;);</span>
+        }
+<span class="fc" id="L33">    }</span>
+    
+     private void quicksort(int left, int right){
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if(left &lt; right){</span>
+<span class="fc" id="L37">            int divider = split(left, right);</span>
+<span class="fc" id="L38">            quicksort(left, divider-1);</span>
+<span class="fc" id="L39">            quicksort(divider+1, right);</span>
+        }
+<span class="fc" id="L41">    }</span>
+     
+    private int split(int left, int right){
+<span class="fc" id="L44">        int i = left;</span>
+<span class="fc" id="L45">        int j = right-1;</span>
+<span class="fc" id="L46">        TYP pivot = getElement(right);</span>
+        
+        do{
+<span class="fc bfc" id="L49" title="All 4 branches covered.">            while(getElement(i).compareTo(pivot) &lt;= 0 &amp;&amp; i &lt; right){</span>
+<span class="fc" id="L50">                i++;</span>
+            }
+<span class="fc bfc" id="L52" title="All 4 branches covered.">            while(getElement(j).compareTo(pivot) &gt;= 0 &amp;&amp; j &gt; left){</span>
+<span class="fc" id="L53">                j--;</span>
+            }
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if(i &lt; j){</span>
+<span class="fc" id="L56">                TYP tempElement = getElement(i);</span>
+<span class="fc" id="L57">                set(i, getElement(j));</span>
+<span class="fc" id="L58">                set(j, tempElement);</span>
+            }
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        }while(i &lt; j);</span>
+        
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(getElement(i).compareTo(pivot) == 1){</span>
+<span class="fc" id="L63">            TYP tempElement = getElement(i);</span>
+<span class="fc" id="L64">            set(i, pivot);</span>
+<span class="fc" id="L65">            set(right, tempElement);</span>
+        }
+<span class="fc" id="L67">        return i;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
