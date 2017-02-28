@@ -5,12 +5,13 @@ package ListModul;
  * @author cooperdebear
  * @param <TYP> Gibt an, von welchem Typ die Inhalte des Arrays sein sollen.
  */
+public class ArrayList<TYP extends Comparable<TYP>> extends List<TYP>{
     
     private TYP[] arrayList;
     private int counter;
     
     public ArrayList(){
-        this.arrayList = (TYP[]) new Object[10];
+        this.arrayList = (TYP[]) new Comparable[10];
         counter = 0;
     }
     
@@ -100,7 +101,7 @@ package ListModul;
     }
     
     private TYP[] giveBackIncreasedArray(TYP[] array){
-        array = (TYP[]) new Object[arrayList.length*2];
+        array = (TYP[]) new Comparable[arrayList.length*2];
         System.arraycopy(arrayList, 0, array, 0, arrayList.length);
         return array;
     }
@@ -112,7 +113,7 @@ package ListModul;
     
     @Override
     public void sort(){
-        if(size() <= 2){
+        if(size() > 0){
             quicksort(0, size()-1);
         }
         else{
