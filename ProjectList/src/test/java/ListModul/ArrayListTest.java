@@ -1,20 +1,37 @@
 package ListModul;
 
+import java.util.Arrays;
+import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 /**
  *
  * @author cooperdebear
  */
+@RunWith(Parameterized.class)
 public class ArrayListTest {
+    
+    @Parameters
+    public static Collection<Integer[]> data() {
+        return Arrays.asList(new Integer[][] {     
+            {0}, {199}, {20}, {3}, {45}, {5}, {1111}  
+        });
+    }
     
     private static ArrayList<Integer> list;
     
+    private int input;
+    
+    public ArrayListTest(int input){
+        this.input = input;
+    }
     @BeforeClass
     public static void createList(){
         list = new ArrayList<>();
@@ -32,28 +49,26 @@ public class ArrayListTest {
     
     @Test
     public void add(){
-        Object a = 19;
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i <= input; i++){
             list.add(i);
         }
-        assertEquals(a, list.getElement(19));
+        assertEquals((Object) input, list.getElement(input));
     }
     
     @Test
     public void addSecond(){
-        Object a = 19;
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i <= input; i++){
             list.add(i, i);
         }
-        assertEquals(a, list.getElement(19));
+        assertEquals((Object) input, list.getElement(input));
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void addAndRemoveBackwards(){
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i <= input; i++){
             list.add(i);
         }
-        for(int i = 19; i >= 0; i--){
+        for(int i = input; i >= 0; i--){
             list.remove(i);
         }
         list.getElement(0);
@@ -61,10 +76,10 @@ public class ArrayListTest {
     
     @Test (expected = IllegalArgumentException.class)
     public void addAndRemoveForward(){
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i <= input; i++){
             list.add(i);
         }
-        for(int i = 0; i <= 19; i++){
+        for(int i = 0; i <= input; i++){
             list.remove(i);
         }
         list.getElement(0);
@@ -72,41 +87,36 @@ public class ArrayListTest {
     
     @Test
     public void size(){
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i <= input; i++){
             list.add(i);
         }
-        Object a = 20;
-        assertEquals( a, list.size());
+        assertEquals(input+1, list.size());
     }
     
     @Test
     public void addinEmptyList(){
-        list.add(0, 0);
-        list.add(0, 1);
-        list.add(0, 2);
+        list.add(0, input);
+        list.add(0, input+1);
+        list.add(0, input+2);
         
-        Object a = 2;
-        Object b = 1;
-        Object c = 0;
-        assertEquals(a, list.getElement(0));
-        assertEquals(b, list.getElement(1));
-        assertEquals(c, list.getElement(2));
+        assertEquals((Object)(input+2), list.getElement(0));
+        assertEquals((Object)(input+1), list.getElement(1));
+        assertEquals((Object)(input), list.getElement(2));
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void insertOutOfSize(){
-        list.add(1, 2);
+        list.add(1, input);
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void insertOutOfArrayLength(){
-        list.add(100, 1);
-        list.add(100, 1);
+        list.add(100, input);
     }
     
     @Test (expected = IllegalArgumentException.class)
     public void setFirstPosition(){
-        list.set(0, 2);
+        list.set(0, input);
     }
     
     @Test (expected = IllegalArgumentException.class)
@@ -116,7 +126,7 @@ public class ArrayListTest {
     
     @Test (expected = IllegalArgumentException.class)
     public void addLowerZero(){
-        list.add(-1,9);
+        list.add(-1,input);
     }
     
     @Test
@@ -124,10 +134,9 @@ public class ArrayListTest {
         for(int i = 0; i < 10; i++){
             list.add(0,0);
         }
-        list.add(2,3);
+        list.add(2,input);
         
-        Object a = 3;
-        assertEquals(a, list.getElement(2));
+        assertEquals((Object) input, list.getElement(2));
     }
     
     @Test (expected = IllegalArgumentException.class)
